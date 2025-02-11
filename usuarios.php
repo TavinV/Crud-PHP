@@ -11,6 +11,8 @@
 <!-- Cabeçalho -->
 <header>
     <h1>Usuários Cadastrados</h1>
+    <a href="./admin-login.php">Administração</a>
+    <a href="./index.php">Cadastro</a>
 </header>
 
 <main>

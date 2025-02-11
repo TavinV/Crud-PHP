@@ -11,6 +11,8 @@
 <!-- Página do Formulário Web (Usuário) -->
 <header>
     <h1>PJL</h1>
+    <a href="./admin-login.html">Administração</a>
+    <a href="./usuarios.php">Usuarios</a>
 </header>
 
 <main>
@@ -46,8 +48,6 @@
 </main>
 
 
-
-<script src="validar_inputs.js"></script>
 
 <?php 
     $servidor = "localhost";

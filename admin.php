@@ -51,6 +51,7 @@
 
 <header>
     <h1>PJL - Área Administrativa</h1>
+    <a href="./usuarios.php">Lista de Usuarios</a>
 </header>
 
 <main>
@@ -68,53 +69,46 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>                
-                    <td>João Silva</td>
-                    <td>joao@example.com</td>
-                    <td>(11) 1234 5678</td>
-                    <td>São Paulo</td>
-                    <td>
-                        <button class="edit-btn" onclick="openEditPopup('João Silva', 'joao@example.com', '(11) 1234 5678', 'São Paulo')">Editar</button>
-                        <button class="delete-btn" onclick="openDeletePopup('João Silva', 1)">Excluir</button>
-                    </td>
-                </tr>
+               
                 <?php 
                     $servidor = "localhost";
                     $usuario = "root";
                     $senha = "";
                     $dbnome = "pjldb";
-                
+                    
                     // Criando a conexão com o banco de dados 
                     $conexao = mysqli_connect($servidor, $usuario, $senha, $dbnome);
                     $comando_banco = "SELECT * FROM users";
-
-                    //Executa a consulta SQL e armazena em uma variável
                     
+                    // Executa a consulta SQL e armazena em uma variável
                     $resultado_tabela = mysqli_query($conexao, $comando_banco);
                     
-                    //Percorrer todos os registros e imprimindo na tela
-
-                    while($linha_registro = mysqli_fetch_assoc($resultado_tabela)){
-                        //Imprimindo os valores da tabema
+                    // Percorrer todos os registros e imprimindo na tela
+                    while ($linha_registro = mysqli_fetch_assoc($resultado_tabela)) {
+                        // Imprimindo os valores da tabela
                         $nome = $linha_registro['nome'];
                         $sobrenome = $linha_registro['sobrenome'];
                         $email = $linha_registro['email'];
                         $telefone = $linha_registro['telefone'];
                         $cidade = $linha_registro['cidade'];
-
+                        $id = $linha_registro['id'];  // Supondo que a tabela tenha um campo 'id'
+                    
                         echo "<tr>";
-                            echo "<td>" . $nome . "</td>";
-                            echo "<td>" . $sobrenome . "</td>";
-                            echo "<td>" . $email . "</td>";
-                            echo "<td>" . $telefone . "</td>";
-                            echo "<td>" . $cidade . "</td>";
-                            echo "<td>";
-                            echo "<button class=\"edit-btn\" onclick=\"openEditPopup('$nome', '$sobrenome', '$email', '$telefone', '$cidade')\">Editar</button>";
-                            echo "<td>";
-                        echo "</tr>";
+                        echo "<td>" . $nome . "</td>";
+                        echo "<td>" . $sobrenome . "</td>";
+                        echo "<td>" . $email . "</td>";
+                        echo "<td>" . $telefone . "</td>";
+                        echo "<td>" . $cidade . "</td>";
                         
+                        // Botão de Editar
+                        echo "<td>";
+                        echo "<button class=\"edit-btn\" onclick=\"openEditPopup('$nome', '$sobrenome', '$email', '$telefone', '$cidade', '$id')\">Editar</button>";
+                        echo "<button class=\"delete-btn\" onclick=\"openDeletePopup('$nome $sobrenome', $id)\">Excluir</button>";
+                        echo "</td>";
+                
+                        echo "</tr>";
                     }
-
+                    
                     //Fechar a conexão
 
                     mysqli_close($conexao);    
@@ -128,7 +122,8 @@
 <div id="edit-popup" class="popup">
     <div class="popup-content">
         <h3>Editar Cadastro</h3>
-        <form id="edit-form">
+        <form id="edit-form" action="update.php" method="POST">
+            <input style="display: none" type="text" id="edit-id" name="id">
             <div class="form-group">
                 <label for="edit-nome">Nome</label>
                 <input type="text" id="edit-nome" name="nome" required>
@@ -169,12 +164,13 @@
 </div>
 
 <script>
-    function openEditPopup(nome, sobrenome, email, telefone, cidade) {
+    function openEditPopup(nome, sobrenome, email, telefone, cidade, id) {
         document.getElementById('edit-nome').value = nome;
-        document.getElementById('edit-sobrenome').value = nome;
+        document.getElementById('edit-sobrenome').value = sobrenome;
         document.getElementById('edit-email').value = email;
         document.getElementById('edit-telefone').value = telefone;
         document.getElementById('edit-cidade').value = cidade;
+        document.getElementById('edit-id').value = id;
         document.getElementById('edit-popup').style.display = 'flex';
     }
 
