@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Fev-2025 às 15:24
+-- Tempo de geração: 11-Fev-2025 às 20:10
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
 
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `pjldb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` int(11) NOT NULL,
+  `login` varchar(50) NOT NULL,
+  `senha` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `admins`
+--
+
+INSERT INTO `admins` (`id`, `login`, `senha`) VALUES
+(1, 'pumapjl', 'senha123');
 
 -- --------------------------------------------------------
 
@@ -41,13 +60,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nome`, `sobrenome`, `telefone`, `email`, `cidade`) VALUES
-(1, 'Otávio', 'Vinícius', '11950231230', 'otavioviniciusads@gmail.com', 'Mogi das Cruzes'),
-(2, 'Igor', 'Teixeira', '11915891623', 'teixeiraigor525@gmail.com', 'Mauá'),
-(3, 'Igor', 'Teixeira', '11915891623', 'teixeiraigor525@gmail.com', 'Mauá');
+(1, 'Otávio', 'Vinícius', '11950231230', 'otavioviniciusads@gmail.com', 'Mauá'),
+(8, 'Lucas', 'Gomes', '11378216328', 'lucasgomes@gmail.com', 'Mogi das Cruzes');
 
 --
 -- Índices para tabelas despejadas
 --
+
+--
+-- Índices para tabela `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices para tabela `users`
@@ -60,10 +84,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de tabela `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
